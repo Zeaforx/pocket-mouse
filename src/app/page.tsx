@@ -1,3 +1,9 @@
-export default function Home() {
-  return <></>;
+import Touchpad from '@/components/client/Touchpad';
+
+export default function HomePage() {
+  return (
+    <div className="flex-1 flex flex-col h-full bg-background p-4">
+      <Touchpad />
+    </div>
+  );
 }
