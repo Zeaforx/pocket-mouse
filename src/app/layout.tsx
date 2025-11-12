@@ -6,7 +6,7 @@ import { SettingsProvider } from '@/app/context/SettingsContext';
 import AppLayout from '@/components/client/AppLayout';
 
 export const metadata: Metadata = {
-  title: 'RemoteTouch',
+  title: 'Pocket Mouse',
   description: 'Remote control with a touch of AI.',
 };
 

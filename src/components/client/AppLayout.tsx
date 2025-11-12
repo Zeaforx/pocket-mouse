@@ -59,7 +59,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           <Button variant="ghost" size="icon" className="shrink-0" asChild>
             <Link href="/">
               <Bot className="size-5 text-primary" />
-              <span className="sr-only">RemoteTouch</span>
+              <span className="sr-only">Pocket Mouse</span>
             </Link>
           </Button>
         </SidebarHeader>
