@@ -13,8 +13,35 @@ import {
   SidebarMenuButton,
   SidebarInset,
   SidebarTrigger,
+  SidebarFooter,
+  useSidebar,
 } from '@/components/ui/sidebar';
 import { Button } from '../ui/button';
+
+function AppHeader() {
+  const { isMobile } = useSidebar();
+  const pathname = usePathname();
+  const menuItems = [
+    { href: '/', label: 'Touchpad' },
+    { href: '/keyboard', label: 'Keyboard' },
+    { href: '/settings', label: 'Settings' },
+  ];
+
+  const hideHeader = pathname === '/' || pathname === '/keyboard';
+
+  if (hideHeader) return null;
+
+  return (
+    <header className="flex h-14 items-center gap-4 border-b bg-background/95 px-4 backdrop-blur-sm md:px-6 sticky top-0 z-30">
+      <SidebarTrigger className={isMobile ? '' : 'md:hidden'} />
+      <div className="flex-1">
+        <h1 className="text-xl font-semibold tracking-tight">
+          {menuItems.find(item => item.href === pathname)?.label}
+        </h1>
+      </div>
+    </header>
+  );
+}
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -25,21 +52,16 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     { href: '/settings', label: 'Settings', icon: Settings2 },
   ];
 
-  const hideHeader = pathname === '/' || pathname === '/keyboard';
-
-
   return (
-    <SidebarProvider>
-      <Sidebar>
+    <SidebarProvider defaultOpen={false}>
+      <Sidebar collapsible="icon" variant="sidebar" side="left">
         <SidebarHeader>
-          <div className="flex items-center gap-2 p-2">
-            <Button variant="ghost" size="icon" className="shrink-0" asChild>
-              <Link href="/">
-                <Bot className="size-5 text-primary" />
-              </Link>
-            </Button>
-            <h2 className="text-lg font-semibold tracking-tight">RemoteTouch</h2>
-          </div>
+          <Button variant="ghost" size="icon" className="shrink-0" asChild>
+            <Link href="/">
+              <Bot className="size-5 text-primary" />
+              <span className="sr-only">RemoteTouch</span>
+            </Link>
+          </Button>
         </SidebarHeader>
         <SidebarContent>
           <SidebarMenu>
@@ -59,18 +81,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             ))}
           </SidebarMenu>
         </SidebarContent>
+        <SidebarFooter>
+            <SidebarTrigger />
+        </SidebarFooter>
       </Sidebar>
       <SidebarInset className="flex flex-col">
-        {!hideHeader && (
-          <header className="flex h-14 items-center gap-4 border-b bg-background/95 px-4 backdrop-blur-sm md:px-6 sticky top-0 z-30">
-            <SidebarTrigger className="md:hidden" />
-            <div className="flex-1">
-              <h1 className="text-xl font-semibold tracking-tight">
-                  {menuItems.find(item => item.href === pathname)?.label}
-              </h1>
-            </div>
-          </header>
-        )}
+        <AppHeader />
         <main className="flex-1 overflow-auto">{children}</main>
       </SidebarInset>
     </SidebarProvider>
