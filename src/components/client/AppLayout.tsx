@@ -25,6 +25,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     { href: '/settings', label: 'Settings', icon: Settings2 },
   ];
 
+  const hideHeader = pathname === '/' || pathname === '/keyboard';
+
+
   return (
     <SidebarProvider>
       <Sidebar>
@@ -58,14 +61,16 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </SidebarContent>
       </Sidebar>
       <SidebarInset className="flex flex-col">
-        <header className="flex h-14 items-center gap-4 border-b bg-background/95 px-4 backdrop-blur-sm md:px-6 sticky top-0 z-30">
-          <SidebarTrigger className="md:hidden" />
-          <div className="flex-1">
-             <h1 className="text-xl font-semibold tracking-tight">
-                {menuItems.find(item => item.href === pathname)?.label}
-            </h1>
-          </div>
-        </header>
+        {!hideHeader && (
+          <header className="flex h-14 items-center gap-4 border-b bg-background/95 px-4 backdrop-blur-sm md:px-6 sticky top-0 z-30">
+            <SidebarTrigger className="md:hidden" />
+            <div className="flex-1">
+              <h1 className="text-xl font-semibold tracking-tight">
+                  {menuItems.find(item => item.href === pathname)?.label}
+              </h1>
+            </div>
+          </header>
+        )}
         <main className="flex-1 overflow-auto">{children}</main>
       </SidebarInset>
     </SidebarProvider>

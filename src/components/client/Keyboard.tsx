@@ -80,11 +80,7 @@ export default function Keyboard() {
   };
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex-1 bg-card border rounded-lg p-4 mb-4 font-mono text-lg overflow-y-auto min-h-[100px]">
-        {log.join('')}
-        <span className="animate-pulse">|</span>
-      </div>
+    <div className="flex flex-col h-full justify-end p-2">
       <div className="space-y-2">
         {keyRows.map((row, rowIndex) => (
           <div key={rowIndex} className="flex gap-2 justify-center">
