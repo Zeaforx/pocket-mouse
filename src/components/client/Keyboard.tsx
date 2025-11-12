@@ -6,26 +6,26 @@ import { cn } from '@/lib/utils';
 import { Delete, CornerDownLeft, ArrowUp } from 'lucide-react';
 
 const keyRows = [
+  ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
   ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
   ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-  ['shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'backspace'],
+  ['caps', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'backspace'],
   ['space', 'enter'],
 ];
 
 export default function Keyboard() {
   const [log, setLog] = useState<string[]>([]);
-  const [isShift, setIsShift] = useState(false);
+  const [isCaps, setIsCaps] = useState(false);
 
   const handleKeyPress = (key: string) => {
     let newKey = key;
-    if (key.length === 1 && isShift) {
-        newKey = key.toUpperCase();
-        setIsShift(false);
+    if (key.length === 1 && isCaps) {
+      newKey = key.toUpperCase();
     }
-    
-    if (key === 'shift') {
-        setIsShift(!isShift);
-        return;
+
+    if (key === 'caps') {
+      setIsCaps(!isCaps);
+      return;
     }
 
     if (key === 'backspace') {
@@ -33,9 +33,8 @@ export default function Keyboard() {
     } else if (key === 'space') {
       setLog((prev) => [...prev, ' ']);
     } else if (key === 'enter') {
-       setLog((prev) => [...prev, '\n']);
-    }
-    else {
+      setLog((prev) => [...prev, '\n']);
+    } else {
       setLog((prev) => [...prev, newKey]);
     }
   };
@@ -44,8 +43,8 @@ export default function Keyboard() {
     let content: React.ReactNode = key;
     let className = 'flex-1';
 
-    if (key.length === 1 && isShift) {
-        content = key.toUpperCase();
+    if (key.length === 1 && isCaps) {
+      content = key.toUpperCase();
     }
 
     switch (key) {
@@ -53,9 +52,9 @@ export default function Keyboard() {
         content = <Delete />;
         className = 'flex-1';
         break;
-      case 'shift':
+      case 'caps':
         content = <ArrowUp />;
-        className = cn('flex-1', isShift && 'bg-accent text-accent-foreground');
+        className = cn('flex-1', isCaps && 'bg-accent text-accent-foreground');
         break;
       case 'space':
         content = 'Space';
