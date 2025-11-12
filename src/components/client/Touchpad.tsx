@@ -66,22 +66,22 @@ export default function Touchpad() {
 
   useEffect(() => {
     if (debouncedGesturePath.length > 2) {
-      startClassifyingTransition(async () => {
-        const gestureData = JSON.stringify(debouncedGesturePath);
-        const response = await handleClassifyGesture(gestureData, context);
+      // startClassifyingTransition(async () => {
+      //   const gestureData = JSON.stringify(debouncedGesturePath);
+      //   const response = await handleClassifyGesture(gestureData, context);
 
-        if (response.success) {
-          setResult(response.data);
-        } else {
-          toast({
-            variant: 'destructive',
-            title: 'Classification Error',
-            description: response.error,
-          });
-          setResult(null);
-        }
-        setGesturePath([]); // Clear path after processing
-      });
+      //   if (response.success) {
+      //     setResult(response.data);
+      //   } else {
+      //     toast({
+      //       variant: 'destructive',
+      //       title: 'Classification Error',
+      //       description: response.error,
+      //     });
+      //     setResult(null);
+      //   }
+      //   setGesturePath([]); // Clear path after processing
+      // });
     } else {
         if(result) setResult(null); // Clear old result if new gesture is too short
     }
@@ -90,19 +90,19 @@ export default function Touchpad() {
 
 
   const handleSuggest = () => {
-    startSuggestingTransition(async () => {
-      const response = await handleSuggestPrompts();
-      if (response.success) {
-        setSuggestions(response.data);
-        if(response.data.length > 0) setPopoverOpen(true);
-      } else {
-        toast({
-          variant: 'destructive',
-          title: 'Suggestion Error',
-          description: response.error,
-        });
-      }
-    });
+    // startSuggestingTransition(async () => {
+    //   const response = await handleSuggestPrompts();
+    //   if (response.success) {
+    //     setSuggestions(response.data);
+    //     if(response.data.length > 0) setPopoverOpen(true);
+    //   } else {
+    //     toast({
+    //       variant: 'destructive',
+    //       title: 'Suggestion Error',
+    //       description: response.error,
+    //     });
+    //   }
+    // });
   };
 
   return (
@@ -168,7 +168,7 @@ export default function Touchpad() {
                       variant="ghost"
                       size="icon"
                       className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8"
-                      disabled={isSuggesting}
+                      disabled={true}
                       onClick={handleSuggest}
                     >
                       {isSuggesting ? (
