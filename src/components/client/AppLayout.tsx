@@ -33,7 +33,6 @@ function AppHeader() {
 
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-background/95 px-4 backdrop-blur-sm md:px-6 sticky top-0 z-30">
-      <SidebarTrigger className={isMobile ? '' : 'md:hidden'} />
       <div className="flex-1">
         <h1 className="text-xl font-semibold tracking-tight">
           {menuItems.find(item => item.href === pathname)?.label}
