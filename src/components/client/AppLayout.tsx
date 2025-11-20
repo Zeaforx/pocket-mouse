@@ -1,8 +1,8 @@
 "use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Keyboard, MousePointer2, Settings2, Bot } from 'lucide-react';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Keyboard, MousePointer2, Settings2, Bot } from "lucide-react";
 import {
   SidebarProvider,
   Sidebar,
@@ -15,19 +15,19 @@ import {
   SidebarTrigger,
   SidebarFooter,
   useSidebar,
-} from '@/components/ui/sidebar';
-import { Button } from '../ui/button';
+} from "@/components/ui/sidebar";
+import { Button } from "../ui/button";
 
 function AppHeader() {
   const { isMobile } = useSidebar();
   const pathname = usePathname();
   const menuItems = [
-    { href: '/', label: 'Touchpad' },
-    { href: '/keyboard', label: 'Keyboard' },
-    { href: '/settings', label: 'Settings' },
+    { href: "/", label: "Touchpad" },
+    { href: "/keyboard", label: "Keyboard" },
+    { href: "/settings", label: "Settings" },
   ];
 
-  const hideHeader = pathname === '/' || pathname === '/keyboard';
+  const hideHeader = pathname === "/" || pathname === "/keyboard";
 
   if (hideHeader) return null;
 
@@ -35,7 +35,7 @@ function AppHeader() {
     <header className="flex h-14 items-center gap-4 border-b bg-background/95 px-4 backdrop-blur-sm md:px-6 sticky top-0 z-30">
       <div className="flex-1">
         <h1 className="text-xl font-semibold tracking-tight">
-          {menuItems.find(item => item.href === pathname)?.label}
+          {menuItems.find((item) => item.href === pathname)?.label}
         </h1>
       </div>
     </header>
@@ -46,9 +46,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   const menuItems = [
-    { href: '/', label: 'Touchpad', icon: MousePointer2 },
-    { href: '/keyboard', label: 'Keyboard', icon: Keyboard },
-    { href: '/settings', label: 'Settings', icon: Settings2 },
+    { href: "/", label: "Touchpad", icon: MousePointer2 },
+    { href: "/keyboard", label: "Keyboard", icon: Keyboard },
+    { href: "/settings", label: "Settings", icon: Settings2 },
   ];
 
   return (
@@ -69,7 +69,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 <SidebarMenuButton
                   asChild
                   isActive={pathname === item.href}
-                  tooltip={{ children: item.label, side: 'right' }}
+                  tooltip={{ children: item.label, side: "right" }}
                 >
                   <Link href={item.href}>
                     <item.icon />
@@ -81,7 +81,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
-            <SidebarTrigger />
+          <SidebarTrigger />
         </SidebarFooter>
       </Sidebar>
       <SidebarInset className="flex flex-col">
